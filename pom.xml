@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- The Basics -->
+    <groupId>com.my_java_app</groupId>
+    <artifactId>hello-world</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>6.0.8</version>
+        </dependency>
+    </dependencies>
+
+    <!-- Build Settings -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>HelloWorld</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+            </plugin>
+            <!--<plugin>
+                <groupId>com.bazaarvoice.maven.plugins</groupId>
+                <artifactId>s3-upload-maven-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <bucketName>qi-artifactory</bucketName>
+                    <source>"D:\projects\qi\java\helloworld\target\"</source>
+                    <destination>/</destination>
+                    <recursive>true</recursive>
+                    <accessKey>8UB9W53TOPXAOS253M8W</accessKey>
+                    <secretKey>tOHmG2FMupohjnAPJuIfo7ZIxRsxHxo3ZHG2+Isi</secretKey>
+                    <endpoint>http://s3-storage.sqroot.local:9000</endpoint>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.gkatzioura.maven.cloud</groupId>
+                <artifactId>s3-storage-wagon</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>upload to bucket</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>s3-upload</goal>
+                        </goals>
+                        <configuration>
+                            <bucket>qi-artifactory</bucket>
+                            <region>us-east-1</region>
+                            <path>"D:\projects\qi\java\helloworld\target\"</path>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+        </plugins>
+        <!--<extensions>
+            <extension>
+                <groupId>com.gkatzioura.maven.cloud</groupId>
+                <artifactId>s3-storage-wagon</artifactId>
+                <version>2.1</version>
+            </extension>
+        </extensions>-->
+    </build>
+
+    <!-- Environment Settings
+    <distributionManagement>
+        <repository>
+            <id>internal.repo</id>
+            <name>Steven Internal Repository</name>
+            <url>http://s3-storage.sqroot.local:9000</url>
+        </repository>
+    </distributionManagement>-->
+
+</project>
